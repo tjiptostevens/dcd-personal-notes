@@ -1,9 +1,13 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Notes from './notes'
 
 const Content = (props) => {
   const [state, setState] = useState({})
-  const [archived, setArchived] = useState(false)
+  const [archived, setArchived] = useState(true)
+
+  useEffect(() => {
+    console.log('changed')
+  }, [props.data])
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
@@ -11,11 +15,13 @@ const Content = (props) => {
     const searchRegex = state.search && new RegExp(`${state.search}`, 'gi')
     return (
       props.data &&
-      props.data.filter(
-        (d) =>
-          (!searchRegex || searchRegex.test(d.title + d.body)) &&
-          (archived ? true : d.archived === archived),
-      )
+      props.data
+        .sort((a, b) => (a.archived === b.archived ? 0 : a.archived ? 1 : -1))
+        .filter(
+          (d) =>
+            (!searchRegex || searchRegex.test(d.title + d.body)) &&
+            (archived ? true : d.archived === archived),
+        )
     )
   }, [props.data, state.search, archived])
   return (
@@ -56,7 +62,11 @@ const Content = (props) => {
             </span>
           </div>
         </div>
-        <Notes data={data} />
+        <Notes
+          data={data}
+          handleUpdate={(id, data) => props.handleUpdate(id, data)}
+          handleDelete={(id) => props.handleDelete(id)}
+        />
       </div>
     </>
   )

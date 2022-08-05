@@ -15,33 +15,79 @@ const Notes = (props) => {
           element={
             <>
               <p>{vis.data.body}</p> <hr />
-              <small>{showFormattedDate(vis.data.createdAt)}</small>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <small>{showFormattedDate(vis.data.createdAt)}</small>{' '}
+                <div>
+                  <i
+                    className="btn bi bi-archive"
+                    onMouseEnter={(e) => {
+                      e.target.className = 'btn bi bi-archive-fill'
+                      //   e.target.innerText = ' Archived'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.className = 'btn bi bi-archive'
+                      //   e.target.innerText = ''
+                    }}
+                    onClick={() => {
+                      props.handleUpdate(vis.data.id, { archived: true })
+                      setVis({ modal: false })
+                    }}
+                    style={{
+                      cursor: 'pointer',
+                      fontWeight: '100',
+                      position: 'relative',
+                      color: 'white',
+                    }}
+                  >
+                    Archived
+                  </i>
+                  <i
+                    className="btn bi bi-trash"
+                    onMouseEnter={(e) => {
+                      e.target.className = 'btn bi bi-trash-fill'
+                      //   e.target.innerText = ' Remove'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.className = 'btn bi bi-trash'
+                      //   e.target.innerText = ''
+                    }}
+                    onClick={() => {
+                      props.handleDelete(vis.data.id)
+                      setVis({ modal: false })
+                    }}
+                    style={{
+                      cursor: 'pointer',
+                      fontWeight: '100',
+                      position: 'relative',
+                      color: 'white',
+                    }}
+                  >
+                    Remove
+                  </i>
+                </div>
+              </div>
             </>
           }
           handleClose={() => setVis({ modal: false })}
         />
       )}
 
-      <div className="row col-md-12" style={{ margin: 0, padding: 0 }}>
+      <div className="row col-12 col-md-12" style={{ margin: 0, padding: 0 }}>
         {/* {console.log(vis)} */}
         {data.map((d) => (
           <div
             key={d.id}
-            className="col-md-3 note-card"
+            className="col-6 col-md-3 note-card"
             style={{ margin: 0, padding: '5px' }}
           >
             <div className={`note-container ${d.archived ? 'archived' : ''}`}>
-              <div className="note-title">
-                {d.title}
-                <i
-                  className="bi bi-x-square"
-                  onMouseEnter={(e) =>
-                    (e.target.className = 'bi bi-x-square-fill')
-                  }
-                  onMouseLeave={(e) => (e.target.className = 'bi bi-x-square')}
-                  style={{ cursor: 'pointer' }}
-                ></i>
-              </div>
+              <div className="note-title">{d.title}</div>
               <div
                 className="note-content"
                 onClick={() =>
@@ -70,13 +116,14 @@ const Notes = (props) => {
             {d.archived ? (
               <div
                 className="archived-stamp-container"
-                onClick={(e) => console.log(e)}
+                style={{ cursor: 'pointer' }}
                 onMouseEnter={(e) =>
                   (e.target.firstChild.textContent = 'UNARCHIVED')
                 }
                 onMouseLeave={(e) =>
                   (e.target.firstChild.textContent = 'ARCHIVED')
                 }
+                onClick={() => props.handleUpdate(d.id, { archived: false })}
               >
                 <div className="archived-stamp">ARCHIVED</div>
               </div>

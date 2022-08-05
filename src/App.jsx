@@ -9,34 +9,43 @@ const initialData = getInitialData()
 
 function App() {
   const [data, setData] = useState(initialData)
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [id, setId] = useState(1)
   const handleAdd = (note) => {
-    setIsLoaded(true)
     let x = data
     x.push(note)
     setData(x)
-    setIsLoaded(false)
+    setId(id + 1)
     console.log('ok')
     return data
   }
+
   const handleUpdate = (id, note) => {
-    setData({ ...data, note })
+    let x = data
+    let i = x.findIndex((obj) => obj.id === id)
+    let y = { ...x[i], ...note }
+    x[i] = y
+    setData(x)
+    setId(id + 1)
   }
-  const handleDelete = (id, note) => {
-    let lists = data
-    console.log(lists)
-    if (lists.length === 0) {
-      setData({ ...data })
-    } else {
-      setData({ ...data, lists })
-    }
+  const handleDelete = (id) => {
+    let x = data
+    let i = x.findIndex((obj) => obj.id === id)
+    x.splice(i, 1)
+    console.log(x)
+    setData(x)
+    setId(id + 1)
   }
 
   return (
     <div className="App body-container">
       {console.log(data)}
       <Header handleAdd={handleAdd} />
-      {isLoaded ? '' : <Content data={data} />}
+      <Content
+        key={id}
+        data={data}
+        handleUpdate={(id, data) => handleUpdate(id, data)}
+        handleDelete={(id) => handleDelete(id)}
+      />
     </div>
   )
 }
