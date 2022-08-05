@@ -35,7 +35,7 @@ const NoteAdd = (props) => {
   }
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label className="form-label">
           Title{' '}
           <small style={{ color: 'yellow' }}>
@@ -60,7 +60,7 @@ const NoteAdd = (props) => {
           onChange={handleChange}
           required={true}
         />
-        <button className="btn btn-light" type="submit" onClick={handleSubmit}>
+        <button className="btn btn-light" type="submit">
           ADD NOTES
         </button>
       </form>
