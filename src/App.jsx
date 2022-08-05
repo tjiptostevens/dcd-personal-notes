@@ -9,8 +9,15 @@ const initialData = getInitialData()
 
 function App() {
   const [data, setData] = useState(initialData)
+  const [isLoaded, setIsLoaded] = useState(false)
   const handleAdd = (note) => {
-    setData({ ...data, note })
+    setIsLoaded(true)
+    let x = data
+    x.push(note)
+    setData(x)
+    setIsLoaded(false)
+    console.log('ok')
+    return data
   }
   const handleUpdate = (id, note) => {
     setData({ ...data, note })
@@ -23,13 +30,13 @@ function App() {
     } else {
       setData({ ...data, lists })
     }
-    // setData({ ...data, archived: true })
   }
+
   return (
     <div className="App body-container">
-      {/* {console.log(data)} */}
+      {console.log(data)}
       <Header handleAdd={handleAdd} />
-      <Content data={data} />
+      {isLoaded ? '' : <Content data={data} />}
     </div>
   )
 }

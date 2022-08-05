@@ -32,7 +32,7 @@ const Notes = (props) => {
           >
             <div className={`note-container ${d.archived ? 'archived' : ''}`}>
               <div className="note-title">
-                {d.title}{' '}
+                {d.title}
                 <i
                   className="bi bi-x-square"
                   onMouseEnter={(e) =>

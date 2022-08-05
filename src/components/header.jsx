@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Modal from './modal'
+import NoteAdd from './noteAdd'
 
 const Header = (props) => {
   const [vis, setVis] = useState({ modal: false })
@@ -8,7 +9,13 @@ const Header = (props) => {
       <Modal
         modal={vis.modal}
         title={'ADD NEW NOTES'}
-        handleClose={() => setVis({ modal: false })}
+        element={
+          <NoteAdd
+            handleAdd={(e) => props.handleAdd(e)}
+            handleClose={(e) => setVis({ modal: false })}
+          />
+        }
+        handleClose={(e) => setVis({ modal: false })}
       />
       <div
         className="body-left"

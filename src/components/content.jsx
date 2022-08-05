@@ -14,7 +14,7 @@ const Content = (props) => {
         (d) => !searchRegex || searchRegex.test(d.title + d.body),
       )
     )
-  }, [props.data])
+  }, [props.data, state.search])
   return (
     <>
       <div className="body-right">
@@ -25,6 +25,7 @@ const Content = (props) => {
           <div className="body-right-search">
             <input
               type="search"
+              name="search"
               className="form-control rounded"
               placeholder="Search Here"
               onChange={handleChange}

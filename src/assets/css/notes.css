@@ -4,6 +4,17 @@
     text-align: left;
 }
 
+.mansory {
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+    -ms-flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100vw;
+    font-size: 0;
+}
+
 .note-card {
     position: relative;
 }
