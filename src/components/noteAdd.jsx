@@ -14,14 +14,15 @@ const NoteAdd = (props) => {
     let val = e.target.value
     let x
     if (nam === 'title') {
-      setData({ ...data, [e.target.name]: e.target.value })
       if (val.length === 50) {
         setError({ ...error, title: 'Max Character Reached' })
       } else if (val.length > 30 && val.length < 50) {
         x = 50 - val.length
         setError({ ...error, title: x + ' Character left.' })
+        setData({ ...data, [e.target.name]: e.target.value })
       } else {
         setError({ ...error, title: false })
+        setData({ ...data, [e.target.name]: e.target.value })
       }
     } else {
       setData({ ...data, [e.target.name]: e.target.value })
@@ -47,7 +48,6 @@ const NoteAdd = (props) => {
           type="text"
           name="title"
           value={data.title}
-          maxLength="50"
           onChange={handleChange}
           required={true}
         />
