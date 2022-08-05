@@ -3,6 +3,7 @@ import Notes from './notes'
 
 const Content = (props) => {
   const [state, setState] = useState({})
+  const [archived, setArchived] = useState(false)
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
@@ -11,10 +12,12 @@ const Content = (props) => {
     return (
       props.data &&
       props.data.filter(
-        (d) => !searchRegex || searchRegex.test(d.title + d.body),
+        (d) =>
+          (!searchRegex || searchRegex.test(d.title + d.body)) &&
+          (archived ? true : d.archived === archived),
       )
     )
-  }, [props.data, state.search])
+  }, [props.data, state.search, archived])
   return (
     <>
       <div className="body-right">
@@ -23,6 +26,24 @@ const Content = (props) => {
             <b>NOTES COLLECTION</b>
           </div>
           <div className="body-right-search">
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                margin: '0 15px',
+                width: '200px',
+                textAlign: 'right',
+                borderRight: 'solid 1px gray',
+              }}
+            >
+              Show Archived
+              <i
+                className={archived ? 'bi bi-check-square' : 'bi bi-square'}
+                style={{ cursor: 'pointer', padding: '0 15px' }}
+                onClick={() => setArchived(!archived)}
+              ></i>
+            </div>
+
             <input
               type="search"
               name="search"

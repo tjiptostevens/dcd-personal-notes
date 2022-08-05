@@ -14,7 +14,14 @@ const Modal = (props) => {
                 <h1>{props.title}</h1>
               </div>
               <div style={{ cursor: 'pointer' }} onClick={handleClose}>
-                <i className="bi bi-x-square"></i>
+                <i
+                  className="bi bi-x-square"
+                  onMouseEnter={(e) =>
+                    (e.target.className = 'bi bi-x-square-fill')
+                  }
+                  onMouseLeave={(e) => (e.target.className = 'bi bi-x-square')}
+                  style={{ cursor: 'pointer' }}
+                ></i>
               </div>
             </div>
             <hr />

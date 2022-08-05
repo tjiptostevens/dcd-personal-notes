@@ -15,7 +15,6 @@ const NoteAdd = (props) => {
     let x
     if (nam === 'title') {
       setData({ ...data, [e.target.name]: e.target.value })
-      console.log(val.length)
       if (val.length === 50) {
         setError({ ...error, title: 'Max Character Reached' })
       } else if (val.length > 30 && val.length < 50) {
