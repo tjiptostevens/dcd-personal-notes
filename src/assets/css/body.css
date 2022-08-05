@@ -1,0 +1,50 @@
+hr {
+    color: white;
+}
+
+.body-container {
+    display: flex;
+}
+
+.body-left {
+    width: 250px;
+    max-width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.body-right {
+    height: 100%;
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.body-right-title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    margin-bottom: 25px;
+}
+
+.body-right-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+    height: fit-content;
+    margin-left: 50px;
+    position: relative;
+}
+
+.body-right-search>span {
+    position: absolute;
+    right: 15px;
+}

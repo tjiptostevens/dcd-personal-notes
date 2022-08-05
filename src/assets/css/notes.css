@@ -1,0 +1,67 @@
+.note-container {
+    border: solid 1px rgb(255, 123, 0);
+    border-radius: 5px;
+    text-align: left;
+}
+
+.note-card {
+    position: relative;
+}
+
+.note-title {
+    padding: 10px;
+    background-color: rgb(255, 123, 0);
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-content {
+    padding: 10px;
+    position: relative;
+}
+
+.note-content:hover small {
+    font-weight: bold;
+    transition: all 500ms;
+}
+
+.note-read-more {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient( 0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.note-read-more>small {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.archived {
+    opacity: 0.5;
+}
+
+.archived-stamp-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.archived-stamp {
+    color: red;
+    font-weight: bolder;
+    font-size: xx-large;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    padding: 7px 15px;
+    border: 3px solid red;
+}
