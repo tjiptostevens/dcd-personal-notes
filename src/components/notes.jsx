@@ -16,14 +16,28 @@ const Notes = (props) => {
             <>
               <p>{vis.data.body}</p> <hr />
               <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
+                className="row col-12 col-md-12"
+                style={{ padding: '0', margin: '0' }}
               >
-                <small>{showFormattedDate(vis.data.createdAt)}</small>{' '}
-                <div>
+                <div
+                  className="col-6 col-md-6"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    padding: '0',
+                    color: 'gray',
+                  }}
+                >
+                  <small>{showFormattedDate(vis.data.createdAt)}</small>{' '}
+                </div>
+                <div
+                  className="col-6 col-md-6"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    padding: '0',
+                  }}
+                >
                   <i
                     className="btn bi bi-archive"
                     onMouseEnter={(e) => {
@@ -92,7 +106,7 @@ const Notes = (props) => {
         {data.map((d) => (
           <div
             key={d.id}
-            className="col-6 col-md-3 note-card"
+            className="col-12 col-md-3 note-card"
             style={{ margin: 0, padding: '5px' }}
           >
             <div className={`note-container ${d.archived ? 'archived' : ''}`}>

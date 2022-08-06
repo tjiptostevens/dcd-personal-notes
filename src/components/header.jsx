@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import Modal from './modal'
 import NoteAdd from './noteAdd'
+import useWindow from '../custom/useWindow'
 
 const Header = (props) => {
+  const { width } = useWindow()
   const [vis, setVis] = useState({ modal: false })
   return (
     <>
+      {console.log(width)}
       <Modal
         modal={vis.modal}
         title={'ADD NEW NOTES'}
@@ -18,7 +21,7 @@ const Header = (props) => {
         handleClose={(e) => setVis({ modal: false })}
       />
       <div
-        className="body-left"
+        className={width > 450 ? 'body-left' : 'body-left-m'}
         style={{ padding: '15px', background: '#1a1a1a' }}
       >
         <div
@@ -39,7 +42,7 @@ const Header = (props) => {
           className="form-control"
           onClick={() => setVis({ ...vis, modal: true })}
         >
-          ADD NOTES
+          {width > 450 ? 'ADD NOTE' : <i className="bi bi-plus">NOTE</i>}
         </button>
       </div>
     </>

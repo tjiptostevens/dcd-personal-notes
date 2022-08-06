@@ -43,13 +43,14 @@ hr {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 70%;
-    height: fit-content;
-    margin-left: 50px;
-    position: relative;
+    /* width: 70%; */
+    /* height: fit-content; */
+    /* margin-left: 50px; */
+    /* position: relative; */
 }
 
-.body-right-search>span {
+
+/* .body-right-search>span {
     position: absolute;
     right: 15px;
-}
+} */

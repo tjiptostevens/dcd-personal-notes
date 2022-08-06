@@ -1,0 +1,16 @@
+.body-container-m {
+    display: flex;
+    flex-direction: column;
+}
+
+.body-left-m {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+}
+
+.body-right-search-m {
+    display: flex;
+    flex-direction: row;
+}

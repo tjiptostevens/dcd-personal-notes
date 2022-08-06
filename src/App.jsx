@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import './App.css'
+import './assets/css/mobile.css'
 import './assets/css/body.css'
 import './assets/css/modal.css'
 import Content from './components/content'
 import Header from './components/header'
 import { getInitialData } from './config/initialData'
+import useWindow from './custom/useWindow'
 const initialData = getInitialData()
 
 function App() {
+  const { width } = useWindow()
   const [data, setData] = useState(initialData)
   const [divId, setDivId] = useState(1)
   const handleAdd = (note) => {
@@ -37,7 +40,9 @@ function App() {
   }
 
   return (
-    <div className="App body-container">
+    <div
+      className={width > 450 ? 'App body-container' : 'App body-container-m'}
+    >
       <Header handleAdd={handleAdd} />
       <Content
         key={divId}

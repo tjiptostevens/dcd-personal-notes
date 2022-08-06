@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import useWindow from '../custom/useWindow'
 import Notes from './notes'
 
 const Content = (props) => {
+  const { width } = useWindow()
   const [state, setState] = useState({})
   const [archived, setArchived] = useState(true)
 
@@ -37,41 +39,63 @@ const Content = (props) => {
     <>
       <div className="body-right">
         <div className="body-right-title">
-          <div>
-            <b>NOTES COLLECTION</b>
-          </div>
-          <div className="body-right-search">
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                margin: '0 15px',
-                width: '200px',
-                textAlign: 'right',
-                borderRight: 'solid 1px gray',
-              }}
-            >
-              Show Archived
-              <i
-                className={archived ? 'bi bi-check-square' : 'bi bi-square'}
-                style={{ cursor: 'pointer', padding: '0 15px' }}
-                onClick={() => {
-                  setArchived(!archived)
-                  localStorage.setItem('archived', !archived)
-                }}
-              ></i>
+          {width > 450 ? (
+            <div className="col-md-3" style={{ textAlign: 'left' }}>
+              <b>NOTES COLLECTION</b>
             </div>
-
-            <input
-              type="search"
-              name="search"
-              className="form-control rounded"
-              placeholder="Search Here"
-              onChange={handleChange}
-            />
-            <span>
-              <i className="bi bi-search"></i>
-            </span>
+          ) : (
+            ''
+          )}
+          <div
+            className={
+              width > 450
+                ? 'col-12 col-md-9 body-right-search'
+                : 'col-12 col-md-9 body-right-search-m'
+            }
+          >
+            {/* {width > 450 ? ( */}
+            <div className="col-4 col-md-3">
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  margin: '0 15px',
+                  textAlign: 'right',
+                  borderRight: 'solid 1px gray',
+                }}
+              >
+                Show Archived
+                <i
+                  className={archived ? 'bi bi-check-square' : 'bi bi-square'}
+                  style={{ cursor: 'pointer', padding: '0 15px' }}
+                  onClick={() => {
+                    setArchived(!archived)
+                    localStorage.setItem('archived', !archived)
+                  }}
+                ></i>
+              </div>
+            </div>
+            {/* ) : (
+               ''
+             )}*/}
+            <div className="col-8 col-md-9">
+              <div style={{ position: 'relative' }}>
+                <input
+                  type="search"
+                  name="search"
+                  className="form-control rounded"
+                  style={{ width: '100%' }}
+                  placeholder="Search Here"
+                  onChange={handleChange}
+                />
+                <span
+                  style={{ position: 'absolute', top: '7px', right: '15px' }}
+                >
+                  <i className="bi bi-search"></i>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         {data.length === 0 ? (
