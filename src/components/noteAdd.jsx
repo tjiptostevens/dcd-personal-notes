@@ -30,7 +30,6 @@ const NoteAdd = (props) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    // console.log(data)
     props.handleAdd(data)
     props.handleClose()
   }

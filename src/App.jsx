@@ -38,7 +38,6 @@ function App() {
 
   return (
     <div className="App body-container">
-      {/* {console.log(data)} */}
       <Header handleAdd={handleAdd} />
       <Content
         key={id}

@@ -8,8 +8,6 @@ const Notes = (props) => {
   const [vis, setVis] = useState({ modal: false })
   return (
     <>
-      {/* {console.log(vis)} */}
-      {console.log(data)}
       {vis.data && (
         <Modal
           modal={vis.modal}
