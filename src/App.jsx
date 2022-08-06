@@ -9,12 +9,12 @@ const initialData = getInitialData()
 
 function App() {
   const [data, setData] = useState(initialData)
-  const [id, setId] = useState(1)
+  const [divId, setDivId] = useState(1)
   const handleAdd = (note) => {
     let x = data
     x.push(note)
     setData(x)
-    setId(id + 1)
+    setDivId(divId + 1)
     console.log('added')
   }
 
@@ -24,7 +24,7 @@ function App() {
     let y = { ...x[i], ...note }
     x[i] = y
     setData(x)
-    setId(id + 1)
+    setDivId(divId + 1)
     console.log('updated')
   }
   const handleDelete = (id) => {
@@ -32,7 +32,7 @@ function App() {
     let i = x.findIndex((obj) => obj.id === id)
     x.splice(i, 1)
     setData(x)
-    setId()
+    setDivId(divId + 1)
     console.log('deleted')
   }
 
@@ -40,7 +40,7 @@ function App() {
     <div className="App body-container">
       <Header handleAdd={handleAdd} />
       <Content
-        key={id}
+        key={divId}
         data={data}
         handleUpdate={(id, data) => handleUpdate(id, data)}
         handleDelete={(id) => handleDelete(id)}
