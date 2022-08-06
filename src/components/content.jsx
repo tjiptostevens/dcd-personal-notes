@@ -9,7 +9,14 @@ const Content = (props) => {
     console.log('changed')
   }, [props.data])
   useEffect(() => {
-    localStorage.setItem('archived', true)
+    let x = JSON.parse(localStorage.getItem('archived', true))
+    console.log(x)
+    if (x === null) {
+      localStorage.setItem('archived', true)
+      setArchived(true)
+    } else {
+      setArchived(x)
+    }
   }, [])
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -46,11 +53,7 @@ const Content = (props) => {
             >
               Show Archived
               <i
-                className={
-                  JSON.parse(localStorage.getItem('archived'))
-                    ? 'bi bi-check-square'
-                    : 'bi bi-square'
-                }
+                className={archived ? 'bi bi-check-square' : 'bi bi-square'}
                 style={{ cursor: 'pointer', padding: '0 15px' }}
                 onClick={() => {
                   setArchived(!archived)
@@ -71,7 +74,7 @@ const Content = (props) => {
             </span>
           </div>
         </div>
-        {props.data.length === 0 ? (
+        {data.length === 0 ? (
           <div>
             <h3>"It's deserted in here."</h3>
           </div>
