@@ -8,21 +8,23 @@ const Content = (props) => {
   useEffect(() => {
     console.log('changed')
   }, [props.data])
+  useEffect(() => {
+    localStorage.setItem('archived', true)
+  }, [])
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
   const data = useMemo(() => {
     const searchRegex = state.search && new RegExp(`${state.search}`, 'gi')
-    return (
-      props.data &&
-      props.data
-        .sort((a, b) => (a.archived === b.archived ? 0 : a.archived ? 1 : -1))
-        .filter(
-          (d) =>
-            (!searchRegex || searchRegex.test(d.title + d.body)) &&
-            (archived ? true : d.archived === archived),
-        )
-    )
+    return props.data && props.data !== []
+      ? props.data
+          .sort((a, b) => (a.archived === b.archived ? 0 : a.archived ? 1 : -1))
+          .filter(
+            (d) =>
+              (!searchRegex || searchRegex.test(d.title + d.body)) &&
+              (archived ? true : d.archived === archived),
+          )
+      : props.data
   }, [props.data, state.search, archived])
   return (
     <>
@@ -44,9 +46,16 @@ const Content = (props) => {
             >
               Show Archived
               <i
-                className={archived ? 'bi bi-check-square' : 'bi bi-square'}
+                className={
+                  JSON.parse(localStorage.getItem('archived'))
+                    ? 'bi bi-check-square'
+                    : 'bi bi-square'
+                }
                 style={{ cursor: 'pointer', padding: '0 15px' }}
-                onClick={() => setArchived(!archived)}
+                onClick={() => {
+                  setArchived(!archived)
+                  localStorage.setItem('archived', !archived)
+                }}
               ></i>
             </div>
 
@@ -62,11 +71,17 @@ const Content = (props) => {
             </span>
           </div>
         </div>
-        <Notes
-          data={data}
-          handleUpdate={(id, data) => props.handleUpdate(id, data)}
-          handleDelete={(id) => props.handleDelete(id)}
-        />
+        {props.data.length === 0 ? (
+          <div>
+            <h3>"It's deserted in here."</h3>
+          </div>
+        ) : (
+          <Notes
+            data={data}
+            handleUpdate={(id, data) => props.handleUpdate(id, data)}
+            handleDelete={(id) => props.handleDelete(id)}
+          />
+        )}
       </div>
     </>
   )

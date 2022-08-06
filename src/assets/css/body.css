@@ -18,20 +18,25 @@ hr {
 .body-right {
     height: 100%;
     width: 100%;
-    padding: 25px;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: auto;
 }
 
 .body-right-title {
     width: 100%;
+    padding: 22px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     height: fit-content;
-    margin-bottom: 25px;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
 }
 
 .body-right-search {

@@ -8,6 +8,8 @@ const Notes = (props) => {
   const [vis, setVis] = useState({ modal: false })
   return (
     <>
+      {/* {console.log(vis)} */}
+      {console.log(data)}
       {vis.data && (
         <Modal
           modal={vis.modal}
@@ -78,8 +80,17 @@ const Notes = (props) => {
         />
       )}
 
-      <div className="row col-12 col-md-12" style={{ margin: 0, padding: 0 }}>
-        {/* {console.log(vis)} */}
+      <div
+        className="col-12 col-md-12"
+        style={{
+          margin: 0,
+          padding: '20px',
+          overflow: 'auto',
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        }}
+      >
         {data.map((d) => (
           <div
             key={d.id}

@@ -15,8 +15,7 @@ function App() {
     x.push(note)
     setData(x)
     setId(id + 1)
-    console.log('ok')
-    return data
+    console.log('added')
   }
 
   const handleUpdate = (id, note) => {
@@ -26,19 +25,20 @@ function App() {
     x[i] = y
     setData(x)
     setId(id + 1)
+    console.log('updated')
   }
   const handleDelete = (id) => {
     let x = data
     let i = x.findIndex((obj) => obj.id === id)
     x.splice(i, 1)
-    console.log(x)
     setData(x)
-    setId(id + 1)
+    setId()
+    console.log('deleted')
   }
 
   return (
     <div className="App body-container">
-      {console.log(data)}
+      {/* {console.log(data)} */}
       <Header handleAdd={handleAdd} />
       <Content
         key={id}
